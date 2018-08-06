@@ -1,0 +1,125 @@
+---
+
+- name: Inspecting configured central logservers
+  setup: {}
+  with_items: "{{ groups['server-central-logserver'] }}"
+
+- name: Ensuring the existence of subconfiguration directory
+  file:
+    path: /etc/syslog-ng/conf.d
+    state: directory
+
+- name: Configuring syslog-ng daemon
+  template:
+    src: "{{ item }}"
+    dest: /etc/syslog-ng/syslog-ng.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  with_first_found:
+    - "host_files/{{ inventory_hostname }}/syslog-ng.conf.j2"
+    - "group_files/servers-production/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-production/syslog-ng.conf.j2"
+    - "group_files/servers-development/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-development/syslog-ng.conf.j2"
+    - "group_files/servers-demo/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-demo/syslog-ng.conf.j2"
+    - "group_files/servers/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers/syslog-ng.conf.j2"
+    - "syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "syslog-ng.conf.j2"
+  notify: Restart syslog-ng service
+
+- name: Ensuring syslog-ng daemon is running and enabled at system start.
+  service:
+    name: "{{ hm_logged__service_name }}"
+    state: started
+    enabled: yes
+
+- name: Removing unnecessary logrotate configurations
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/logrotate.d/rsyslog.disabled
+
+- name: Configuring logrotate for apt
+  template:
+    src: "{{ item }}"
+    dest: /etc/logrotate.d/apt
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - "host_files/{{ inventory_hostname }}/logrotate_apt.j2"
+    - "group_files/servers-production/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-production/logrotate_apt.j2"
+    - "group_files/servers-development/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-development/logrotate_apt.j2"
+    - "group_files/servers-demo/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-demo/logrotate_apt.j2"
+    - "group_files/servers/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers/logrotate_apt.j2"
+    - "logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "logrotate_apt.j2"
+
+- name: Configuring logrotate for aptitude
+  template:
+    src: "{{ item }}"
+    dest: /etc/logrotate.d/aptitude
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - "host_files/{{ inventory_hostname }}/logrotate_aptitude.j2"
+    - "group_files/servers-production/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-production/logrotate_aptitude.j2"
+    - "group_files/servers-development/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-development/logrotate_aptitude.j2"
+    - "group_files/servers-demo/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-demo/logrotate_aptitude.j2"
+    - "group_files/servers/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers/logrotate_aptitude.j2"
+    - "logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "logrotate_aptitude.j2"
+
+- name: Configuring logrotate for dpkg
+  template:
+    src: "{{ item }}"
+    dest: /etc/logrotate.d/dpkg
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - "host_files/{{ inventory_hostname }}/logrotate_dpkg.j2"
+    - "group_files/servers-production/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-production/logrotate_dpkg.j2"
+    - "group_files/servers-development/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-development/logrotate_dpkg.j2"
+    - "group_files/servers-demo/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-demo/logrotate_dpkg.j2"
+    - "group_files/servers/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers/logrotate_dpkg.j2"
+    - "logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "logrotate_dpkg.j2"
+
+- name: Configuring logrotate for syslog-ng
+  template:
+    src: "{{ item }}"
+    dest: /etc/logrotate.d/syslog-ng
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - "host_files/{{ inventory_hostname }}/logrotate_syslog-ng.j2"
+    - "group_files/servers-production/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-production/logrotate_syslog-ng.j2"
+    - "group_files/servers-development/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-development/logrotate_syslog-ng.j2"
+    - "group_files/servers-demo/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-demo/logrotate_syslog-ng.j2"
+    - "group_files/servers/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers/logrotate_syslog-ng.j2"
+    - "logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "logrotate_syslog-ng.j2"

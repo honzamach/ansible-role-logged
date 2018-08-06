@@ -1,0 +1,8 @@
+---
+
+#
+# List of role-related packages, that will be installed on target system.
+#
+hm_logged__package_list:
+  - syslog-ng
+  - logrotate

@@ -1,0 +1,6 @@
+---
+
+- name: Restart syslog-ng service
+  service:
+    name: "{{ hm_logged__service_name }}"
+    state: restarted

@@ -1,0 +1,21 @@
+---
+
+galaxy_info:
+  role_name: logged
+  author: Jan Mach
+  description: Ansible role for convenient configuration of remote logging to central log server.
+  company: CESNET, a.l.e.
+  license: MIT
+  min_ansible_version: 2.5
+  github_branch: master
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+        - jessie
+  galaxy_tags:
+    - system
+    - logging
+
+dependencies:
+  - honzamach.certified

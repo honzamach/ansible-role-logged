@@ -1,0 +1,6 @@
+---
+
+#
+# Name of the syslog-ng service on Debian systems
+#
+hm_logged__service_name: syslog-ng
