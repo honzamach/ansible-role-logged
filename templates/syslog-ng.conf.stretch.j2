@@ -176,7 +176,7 @@ log { source(s_src); filter(f_crit_console); destination(d_console); };
 
 # Send all messages to a remote hosts
 #
-{% for host in groups['server-central-logserver'] %}
+{% for host in groups['server_central_logserver'] %}
 log { source(s_src); destination(d_net_{{ hostvars[host]['ansible_hostname'] }}); };
 {% endfor %}
 

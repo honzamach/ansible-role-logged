@@ -16,7 +16,7 @@ Description
 Main purpose of this role is to configure remote logging to central log server.
 
 The remote logging is automagically set up to all servers in the inventory group
-**server-central-logserver**.
+**server_central_logserver**.
 
 .. note::
 
@@ -130,7 +130,7 @@ Example Playbook
 
 Example content of inventory file ``inventory``::
 
-    [server-central-logserver]
+    [server_central_logserver]
     remote
 
     [servers_logged]
