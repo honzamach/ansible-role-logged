@@ -18,7 +18,11 @@
 - hosts: server-central-logserver
   remote_user: root
   tasks:
-    - action: setup
+    - name: Gather facts from all central log servers
+      setup:
+      delegate_to: "{{ item }}"
+      delegate_facts: True
+      loop: "{{ groups['server-central-logserver'] }}"
 
 #
 # Now we may proceed with configuration.
