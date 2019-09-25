@@ -57,7 +57,7 @@ Role Variables
 There are following internal role variables defined in ``defaults/main.yml`` file,
 that can be overriden and adjusted as needed:
 
-.. envvar:: hm_logged__package_list:
+.. envvar:: hm_logged__package_list
 
     List of role-related packages, that will be installed on target system.
 
@@ -133,12 +133,12 @@ Example content of inventory file ``inventory``::
     [server-central-logserver]
     remote
 
-    [servers-logged]
+    [servers_logged]
     localhost
 
 Example content of role playbook file ``playbook.yml``::
 
-    - hosts: servers-logged
+    - hosts: servers_logged
       remote_user: root
       roles:
         - role: honzamach.logged

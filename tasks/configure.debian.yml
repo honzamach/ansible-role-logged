@@ -2,7 +2,7 @@
 
 - name: Inspecting configured central logservers
   setup: {}
-  with_items: "{{ groups['server-central-logserver'] }}"
+  with_items: "{{ groups['server_central_logserver'] }}"
 
 - name: Ensuring the existence of subconfiguration directory
   file:

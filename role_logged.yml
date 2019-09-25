@@ -15,19 +15,19 @@
 # First make sure to talk to the central syslog server(s), so that we have access
 # to it`s configuration data later.
 #
-- hosts: server-central-logserver
+- hosts: server_central_logserver
   remote_user: root
   tasks:
     - name: Gather facts from all central log servers
       setup:
       delegate_to: "{{ item }}"
       delegate_facts: True
-      loop: "{{ groups['server-central-logserver'] }}"
+      loop: "{{ groups['server_central_logserver'] }}"
 
 #
 # Now we may proceed with configuration.
 #
-- hosts: servers-logged
+- hosts: servers_logged
   remote_user: root
   roles:
     - role: honzamach.logged
