@@ -81,7 +81,7 @@ destination d_xconsole { pipe("/dev/xconsole"); };
 
 # Send the messages to remote hosts
 #
-{% for host in groups['server-central-logserver'] %}
+{% for host in groups['server_central_logserver'] %}
 destination d_net_{{ hostvars[host]['ansible_hostname'] }} {
     tcp("{{ hostvars[host]['ansible_fqdn'] }}"
         port(514)
