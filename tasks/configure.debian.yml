@@ -19,12 +19,8 @@
     backup: yes
   with_first_found:
     - "host_files/{{ inventory_hostname }}/syslog-ng.conf.j2"
-    - "group_files/servers-production/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-production/syslog-ng.conf.j2"
-    - "group_files/servers-development/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-development/syslog-ng.conf.j2"
-    - "group_files/servers-demo/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-demo/syslog-ng.conf.j2"
+    - "group_files/servers-{{ msms_server_type }}/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-{{ msms_server_type }}/syslog-ng.conf.j2"
     - "group_files/servers/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
     - "group_files/servers/syslog-ng.conf.j2"
     - "syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
@@ -53,12 +49,8 @@
     mode: 0644
   with_first_found:
     - "host_files/{{ inventory_hostname }}/logrotate_apt.j2"
-    - "group_files/servers-production/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-production/logrotate_apt.j2"
-    - "group_files/servers-development/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-development/logrotate_apt.j2"
-    - "group_files/servers-demo/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-demo/logrotate_apt.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_apt.j2"
     - "group_files/servers/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
     - "group_files/servers/logrotate_apt.j2"
     - "logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
@@ -73,12 +65,8 @@
     mode: 0644
   with_first_found:
     - "host_files/{{ inventory_hostname }}/logrotate_aptitude.j2"
-    - "group_files/servers-production/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-production/logrotate_aptitude.j2"
-    - "group_files/servers-development/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-development/logrotate_aptitude.j2"
-    - "group_files/servers-demo/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-demo/logrotate_aptitude.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_aptitude.j2"
     - "group_files/servers/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
     - "group_files/servers/logrotate_aptitude.j2"
     - "logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
@@ -93,12 +81,8 @@
     mode: 0644
   with_first_found:
     - "host_files/{{ inventory_hostname }}/logrotate_dpkg.j2"
-    - "group_files/servers-production/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-production/logrotate_dpkg.j2"
-    - "group_files/servers-development/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-development/logrotate_dpkg.j2"
-    - "group_files/servers-demo/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-demo/logrotate_dpkg.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_dpkg.j2"
     - "group_files/servers/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
     - "group_files/servers/logrotate_dpkg.j2"
     - "logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
@@ -113,12 +97,8 @@
     mode: 0644
   with_first_found:
     - "host_files/{{ inventory_hostname }}/logrotate_syslog-ng.j2"
-    - "group_files/servers-production/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-production/logrotate_syslog-ng.j2"
-    - "group_files/servers-development/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-development/logrotate_syslog-ng.j2"
-    - "group_files/servers-demo/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-demo/logrotate_syslog-ng.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "group_files/servers-{{ msms_server_type }}/logrotate_syslog-ng.j2"
     - "group_files/servers/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
     - "group_files/servers/logrotate_syslog-ng.j2"
     - "logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
