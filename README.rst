@@ -1,6 +1,6 @@
-.. _section-role-feature-logged:
+.. _section-role-logged:
 
-Role feature-logged
+Role **logged**
 ================================================================================
 
 Ansible role for convenient configuration of remote logging to central log server.
