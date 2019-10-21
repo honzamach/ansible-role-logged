@@ -26,11 +26,11 @@
     mode: 0644
     backup: yes
   with_first_found:
-    - "host_files/{{ inventory_hostname }}/syslog-ng.conf.j2"
-    - "group_files/servers-{{ msms_server_type }}/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-{{ msms_server_type }}/syslog-ng.conf.j2"
-    - "group_files/servers/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers/syslog-ng.conf.j2"
+    - "inventory/host_files/{{ inventory_hostname }}/honzamach.logged/syslog-ng.conf.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/syslog-ng.conf.j2"
+    - "inventory/group_files/servers/honzamach.logged/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers/honzamach.logged/syslog-ng.conf.j2"
     - "syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2"
     - "syslog-ng.conf.j2"
   notify: Restart syslog-ng service
@@ -56,11 +56,11 @@
     group: root
     mode: 0644
   with_first_found:
-    - "host_files/{{ inventory_hostname }}/logrotate_apt.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_apt.j2"
-    - "group_files/servers/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers/logrotate_apt.j2"
+    - "inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_apt.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_apt.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_apt.j2"
     - "logrotate_apt.{{ ansible_lsb['codename'] }}.j2"
     - "logrotate_apt.j2"
 
@@ -72,11 +72,11 @@
     group: root
     mode: 0644
   with_first_found:
-    - "host_files/{{ inventory_hostname }}/logrotate_aptitude.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_aptitude.j2"
-    - "group_files/servers/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers/logrotate_aptitude.j2"
+    - "inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_aptitude.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_aptitude.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_aptitude.j2"
     - "logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2"
     - "logrotate_aptitude.j2"
 
@@ -88,11 +88,11 @@
     group: root
     mode: 0644
   with_first_found:
-    - "host_files/{{ inventory_hostname }}/logrotate_dpkg.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_dpkg.j2"
-    - "group_files/servers/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers/logrotate_dpkg.j2"
+    - "inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_dpkg.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_dpkg.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_dpkg.j2"
     - "logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2"
     - "logrotate_dpkg.j2"
 
@@ -104,10 +104,10 @@
     group: root
     mode: 0644
   with_first_found:
-    - "host_files/{{ inventory_hostname }}/logrotate_syslog-ng.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers-{{ msms_server_type }}/logrotate_syslog-ng.j2"
-    - "group_files/servers/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
-    - "group_files/servers/logrotate_syslog-ng.j2"
+    - "inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_syslog-ng.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_syslog-ng.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
+    - "inventory/group_files/servers/honzamach.logged/logrotate_syslog-ng.j2"
     - "logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2"
     - "logrotate_syslog-ng.j2"
