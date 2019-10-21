@@ -1,0 +1,10 @@
+---
+
+- name: "ASSERTION: there are central logservers to log to"
+  assert:
+    that:
+      - '"server_central_logserver" in groups'
+      - 'groups["server_central_logserver"]|length > 0'
+    msg: "There are no central logservers to log to"
+  tags:
+    - check
