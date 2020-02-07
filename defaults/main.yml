@@ -1,8 +1,7 @@
 ---
 
-#
-# List of role-related packages, that will be installed on target system.
-#
-hm_logged__package_list:
-  - syslog-ng
-  - logrotate
+hm_logged__install_packages:
+  debian:
+    apt:
+      - syslog-ng
+      - logrotate

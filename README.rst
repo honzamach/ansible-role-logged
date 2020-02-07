@@ -3,108 +3,30 @@
 Role **logged**
 ================================================================================
 
-Ansible role for convenient configuration of remote logging to central log server.
-
 * `Ansible Galaxy page <https://galaxy.ansible.com/honzamach/logged>`__
 * `GitHub repository <https://github.com/honzamach/ansible-role-logged>`__
 * `Travis CI page <https://travis-ci.org/honzamach/ansible-role-logged>`__
 
-
-Description
---------------------------------------------------------------------------------
-
 Main purpose of this role is to configure remote logging to central log server.
 
-The remote logging is automagically set up to all servers in the inventory group
+This role is designed as a client side counterpart to the role :ref:`section-role-logserver`,
+the remote logging is automagically set up to all servers in the inventory group
 **server_central_logserver**.
 
-.. note::
+**Table of Contents:**
 
-    This role supports the :ref:`template customization <section-overview-customize-templates>` feature.
+* :ref:`section-role-logged-installation`
+* :ref:`section-role-logged-dependencies`
+* :ref:`section-role-logged-usage`
+* :ref:`section-role-logged-variables`
+* :ref:`section-role-logged-files`
+* :ref:`section-role-logged-author`
 
-
-Requirements
---------------------------------------------------------------------------------
-
-This role does not have any special requirements.
-
-
-Dependencies
---------------------------------------------------------------------------------
-
-This role is dependent on following roles:
-
-* :ref:`certified <section-role-certified>`
-
-No other roles have direct dependency on this role.
+This role is part of the `MSMS <https://github.com/honzamach/msms>`__ package.
+Some common features are documented in its :ref:`manual <section-manual>`.
 
 
-Managed files
---------------------------------------------------------------------------------
-
-This role directly manages content of following files on target system:
-
-* ``/etc/syslog-ng/syslog-ng.conf``
-* ``/etc/logrotate.d/apt``
-* ``/etc/logrotate.d/aptitude``
-* ``/etc/logrotate.d/dpkg``
-* ``/etc/logrotate.d/syslog-ng``
-
-
-Role Variables
---------------------------------------------------------------------------------
-
-There are following internal role variables defined in ``defaults/main.yml`` file,
-that can be overriden and adjusted as needed:
-
-.. envvar:: hm_logged__package_list
-
-    List of role-related packages, that will be installed on target system.
-
-    * *Datatype:* ``string``
-    * *Default:* (please see YAML file ``defaults/main.yml``)
-
-
-Foreign variables
---------------------------------------------------------------------------------
-
-
-:envvar:`hm_certified__cert_host_dir`
-
-    The syslog-ng daemon will be configured to use custom server certificates.
-
-    * *Occurence:* **mandatory**
-
-:envvar:`hm_certified__trustedcert_ca_dir`
-
-    The syslog-ng daemon will be configured to use custom CA certificate directory.
-
-    * *Occurence:* **mandatory**
-
-
-Usage and customization
---------------------------------------------------------------------------------
-
-This role is (attempted to be) written according to the `Ansible best practices <https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html>`__. The default implementation should fit most users,
-however you may customize it by tweaking default variables and providing custom
-templates.
-
-
-Variable customizations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Most of the usefull variables are defined in ``defaults/main.yml`` file, so they
-can be easily overridden almost from `anywhere <https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable>`__.
-
-
-Template customizations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This roles uses *with_first_found* mechanism for all of its templates. If you do
-not like anything about built-in template files you may provide your own custom
-templates. For now please see the role tasks for list of all checked paths for
-each of the template files.
-
+.. _section-role-logged-installation:
 
 Installation
 --------------------------------------------------------------------------------
@@ -125,18 +47,32 @@ Currently the advantage of using direct Git cloning is the ability to easily upd
 the role when new version comes out.
 
 
-Example Playbook
+.. _section-role-logged-dependencies:
+
+Dependencies
+--------------------------------------------------------------------------------
+
+This role is dependent on following roles:
+
+* :ref:`certified <section-role-certified>`
+
+No other roles have direct dependency on this role.
+
+
+.. _section-role-logged-usage:
+
+Usage
 --------------------------------------------------------------------------------
 
 Example content of inventory file ``inventory``::
 
     [server_central_logserver]
-    remote
+    your-backup-server
 
     [servers_logged]
-    localhost
+    your-server
 
-Example content of role playbook file ``playbook.yml``::
+Example content of role playbook file ``role_playbook.yml``::
 
     - hosts: servers_logged
       remote_user: root
@@ -147,16 +83,82 @@ Example content of role playbook file ``playbook.yml``::
 
 Example usage::
 
-    ansible-playbook -i inventory playbook.yml
+    # Run everything:
+    ansible-playbook --ask-vault-pass --inventory inventory role_playbook.yml
 
 
-License
+.. _section-role-logged-variables:
+
+Configuration variables
 --------------------------------------------------------------------------------
 
-MIT
+
+Internal role variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. envvar:: hm_logged__install_packages
+
+    List of packages defined separately for each linux distribution and package manager,
+    that MUST be present on target system. Any package on this list will be installed on
+    target host. This role currently recognizes only ``apt`` for ``debian``.
+
+    * *Datatype:* ``dict``
+    * *Default:* (please see YAML file ``defaults/main.yml``)
+    * *Example:*
+
+    .. code-block:: yaml
+
+        hm_logged__install_packages:
+          debian:
+            apt:
+              - syslog-ng
+              - ...
 
 
-Author Information
+Foreign variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:envvar:`hm_certified__cert_host_dir`
+
+    The syslog-ng daemon will be configured to use custom server certificates.
+
+:envvar:`hm_certified__trustedcert_ca_dir`
+
+    The syslog-ng daemon will be configured to use custom CA certificate directory.
+
+
+Built-in Ansible variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:envvar:`ansible_lsb['codename']`
+
+    Linux distribution codename. It is used for :ref:`template customizations <section-overview-role-customize-templates>`.
+
+
+.. _section-role-logged-files:
+
+Managed files
 --------------------------------------------------------------------------------
 
-Jan Mach <honza.mach.ml@gmail.com>
+.. note::
+
+    This role supports the :ref:`template customization <section-overview-role-customize-templates>` feature.
+
+This role manages content of following files on target system:
+
+* ``/etc/syslog-ng/syslog-ng.conf`` *[TEMPLATE]*
+* ``/etc/logrotate.d/apt`` *[TEMPLATE]*
+* ``/etc/logrotate.d/aptitude`` *[TEMPLATE]*
+* ``/etc/logrotate.d/dpkg`` *[TEMPLATE]*
+* ``/etc/logrotate.d/syslog-ng`` *[TEMPLATE]*
+
+
+.. _section-role-logged-author:
+
+Author and license
+--------------------------------------------------------------------------------
+
+| *Copyright:* (C) since 2019 Honza Mach <honza.mach.ml@gmail.com>
+| *Author:* Honza Mach <honza.mach.ml@gmail.com>
+| Use of this role is governed by the MIT license, see LICENSE file.
+|
