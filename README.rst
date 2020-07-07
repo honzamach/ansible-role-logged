@@ -56,6 +56,11 @@ This role is dependent on following roles:
 
 * :ref:`certified <section-role-certified>`
 
+  This role is used to manage server certificates and most importantly the content
+  of ``/etc/ssl/trusted_ca`` directory, which contains certificates of all certificate
+  authorities that should be recognized by uses the information about system administrators and user accounts to
+  correctly open the firewall and make system accessible to appropriate users.
+
 No other roles have direct dependency on this role.
 
 
@@ -147,10 +152,55 @@ Managed files
 This role manages content of following files on target system:
 
 * ``/etc/syslog-ng/syslog-ng.conf`` *[TEMPLATE]*
+
+  Customizable with following templates::
+
+    ``inventory/host_files/{{ inventory_hostname }}/honzamach.logged/syslog-ng.conf.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/syslog-ng.conf.j2``
+    ``inventory/group_files/servers/honzamach.logged/syslog-ng.conf.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers/honzamach.logged/syslog-ng.conf.j2``
+
 * ``/etc/logrotate.d/apt`` *[TEMPLATE]*
+
+  Customizable with following templates::
+
+    ``inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_apt.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_apt.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_apt.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_apt.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_apt.j2``
+
 * ``/etc/logrotate.d/aptitude`` *[TEMPLATE]*
+
+  Customizable with following templates::
+
+    ``inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_aptitude.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_aptitude.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_aptitude.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_aptitude.j2``
+
 * ``/etc/logrotate.d/dpkg`` *[TEMPLATE]*
+
+  Customizable with following templates::
+
+    ``inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_dpkg.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_dpkg.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_dpkg.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_dpkg.j2``
+
 * ``/etc/logrotate.d/syslog-ng`` *[TEMPLATE]*
+
+  Customizable with following templates::
+
+    ``inventory/host_files/{{ inventory_hostname }}/honzamach.logged/logrotate_syslog-ng.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers_{{ msms_server_type }}/honzamach.logged/logrotate_syslog-ng.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_syslog-ng.{{ ansible_lsb['codename'] }}.j2``
+    ``inventory/group_files/servers/honzamach.logged/logrotate_syslog-ng.j2``
+
 
 
 .. _section-role-logged-author:
